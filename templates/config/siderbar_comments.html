@@ -1,0 +1,16 @@
+{% load comment_block %}    {# 使用自定义过滤器 detach_char去除.html #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sidebar_comments</title>
+</head>
+<body>
+    <ul>
+        {% for comment in comments %}
+            <li><a href="{{ comment.target|detach_char }}.html">{{ comment.target.title|get_title }}</a></li>
+            {{ comment.nickname }} : {{ comment.content|safe }}
+        {% endfor %}
+    </ul>
+</body>
+</html>

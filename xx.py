@@ -11,3 +11,15 @@ BASE_DIR1 = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fi
 
 print(BASE_DIR)
 print(BASE_DIR1)
+
+
+# s = '111.2'
+# print(s.split('.')[0])
+
+# import re
+#
+# s = '/post/1.html'
+#
+# find_num = re.compile('(\d+)')
+# res_pk = re.search(find_num,s).group()
+# print(res_pk)

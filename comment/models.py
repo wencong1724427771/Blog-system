@@ -4,6 +4,7 @@ from django.db import models
 from blog.models import Post   # 通过外键关联POST，---xx 耦合
 # Create your models here.
 
+
 class Comment(models.Model):
     STATUS_NORMAL = 1
     STATUS_DELETE = 0
@@ -11,7 +12,7 @@ class Comment(models.Model):
         (STATUS_NORMAL,'正常'),
         (STATUS_DELETE,'删除')
     )
-    targrt = models.ForeignKey(Post,verbose_name="评论目标",on_delete=models.CASCADE)
+    target = models.CharField(max_length=100,verbose_name="评论目标")
     content = models.CharField(max_length=2000,verbose_name="内容")
     nickname = models.CharField(max_length=50,verbose_name="昵称")
     website = models.URLField(verbose_name="网站")
@@ -22,4 +23,9 @@ class Comment(models.Model):
 
     class Meta:
         verbose_name = verbose_name_plural = "评论"
+
+    @classmethod
+    def get_by_target(cls,target):
+        '''返回某篇文章下所有有效评论'''
+        return cls.objects.filter(target=target,status=cls.STATUS_NORMAL)
 

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block extre_head %}
+    <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/styles/a11y-light.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <script> hljs.initHighlightingOnLoad();</script>
+{% endblock %}
+
+{% block main %}
+    {% if post %}
+    <h1>{{ post.title }}</h1>
+    <div>
+        <span>作者: <a href="{% url 'author' post.owner.id %}">{{ post.owner.username }}</a></span>
+        <span>分类: <a href="{% url 'category_list' post.category.id %}">{{ post.category.name }}</a></span>
+    </div>
+    <hr>
+    <p class="content">
+        {{ post.content_html|safe }}
+    </p>
+    {% else %}
+        <h5>您搜索的文章不存在！</h5>
+    {% endif %}
+
+    <!-- 评论列表 -->
+    {% load comment_block %}       <!-- comment_block .py文件名 -->
+    {% comment_block target %}     <!-- comment_block 函数名 -->
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('.btn1').click(function () {
+            $('.comment>form').toggleClass('hide');
+        })
+    </script>
+{% endblock %}
