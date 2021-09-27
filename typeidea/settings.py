@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'blog',
     'config',
     'comment',
+
+    'xadmin',
+    'crispy_forms',   # xadmin的Form和页面是基于crispy_forms来实现的
 ]
 
 
